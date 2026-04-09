@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <ui:composition template="/template/maintemplate.xhtml">
+             <ui:define name="maincontent">
+                <p:outputLabel value="" />
+                <p:fieldset legend="Introduction">
+                    <b:panelGrid col-spans="12" styleClass="ui-fluid" >
+                        <p style="font-size:1.5em !important;">                        
+                            The application that will have great benefits for the employees,it will help to captures, edits, and delete employee details.   
+                        </p>  
+                    </b:panelGrid>
+                    <p:separator/>
+                    <b:panelGrid col-spans="12" styleClass="ui-fluid">
+                        <b:row>
+                            <b:column col-sm="12" col-md="12" styleClass="ui-fluid">
+                                <b:commandButton value="Employee Management" rendered="true" action="#{homeBean.routeToEmployee()}" size="md" large-screen="full-width" icon-size="5x" iconAwesome="fa-users" look="primary"/>
+                            </b:column>
+                        </b:row>
+                    </b:panelGrid>
+                </p:fieldset>
+                <p:outputLabel value="" />
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

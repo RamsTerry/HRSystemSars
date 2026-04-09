@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <ui:composition template="/template/template.xhtml">
+            <ui:define name="maincontent">
+                <b:panel rendered="#{employeeBean.list}" look="default"  collapsible="false">
+                    <f:facet name="heading">
+                        <b:panelGrid colSpans="12" size="lg" styleClass="ui-fluid">
+                            <p:outputLabel value="#{employeeBean.panelTitleName}" styleClass="panel-title-css"/>
+                        </b:panelGrid>
+                    </f:facet>
+                    <p:dataTable value="#{employeeBean.employees}" selectionMode="single" selection="#{employeeBean.selectedEmployee}" rowKey="#{employee.id}" var="employee" paginator="true" paginatorPosition="top" paginatorAlwaysVisible="false" reflow="true" rows="10">
+                        <f:facet name="header">
+                            <p:toolbar>
+                                <f:facet name="left">
+                                    <b:commandButton iconSize="lg" size="lg" iconAwesome="fa-plus" look="primary" value="Add" action="#{employeeBean.addOrUpdate(null)}" update="@form"/>
+                                </f:facet>
+                            </p:toolbar>
+                        </f:facet>
+                        <p:ajax event="rowSelect" listener="#{employeeBean.onRowSelect}" update="@form"/>
+                        <p:column headerText="First Name">
+                            <h:outputText value="#{employee.firstName}"/>
+                        </p:column>
+                        <p:column headerText="LastName">
+                            <h:outputText value="#{employee.lastName}"/>
+                        </p:column>
+                        <p:column headerText="Employee Number">
+                            <h:outputText value="#{employee.employeeNumber}"/>
+                        </p:column>                        
+                        <p:column headerText="Action" styleClass="xlarge">
+                            <b:commandButton look="primary" value="Edit" size="xs" icon-size="sm" iconBrand="5.2.0" icon-awesome="fa-pencil" action="#{employeeBean.addOrUpdate(employee)}" update="@form"/>
+                            <p:spacer width="10px"/>
+                            <b:commandButton look="danger" size="xs" value="Delete" icon-size="sm" iconBrand="5.2.0" iconAwesome="fa-trash" action="#{employeeBean.delete(employee)}" update="@form"/>
+                        </p:column>
+                    </p:dataTable>
+                </b:panel>
+                <b:panel rendered="#{employeeBean.add}" look="default" collapsible="false">
+                    <f:facet name="heading">
+                        <p:outputLabel value="#{employeeBean.panelTitleName}" styleClass="panel-title-css"/>
+                    </f:facet>
+                    <b:panelGrid colSpans="6,6" size="lg" style-class="ui-fluid">                        
+                        <b:formGroup>
+                            <p:fieldset legend="First Name">
+                                <b:inputText value="#{employeeBean.entity.firstName}" field-size="lg" required="true" requiredMessage="Enter first name"/>
+                            </p:fieldset>
+                        </b:formGroup>
+                        <b:formGroup>
+                            <p:fieldset legend="Last Name">
+                                <b:inputText value="#{employeeBean.entity.lastName}" field-size="lg" required="true" requiredMessage="Enter last name"/>
+                            </p:fieldset>
+                        </b:formGroup>
+                        <b:formGroup>
+                            <p:fieldset legend="Employee Number">
+                                <b:inputText value="#{employeeBean.entity.employeeNumber}" mask="9{0,999}" maxlength="8" field-size="lg" required="true" requiredMessage="Enter employee number"/>
+                            </p:fieldset>
+                        </b:formGroup> 
+                        <b:formGroup>
+                            <p:fieldset legend="Username">
+                                <b:inputText value="#{employeeBean.entity.username}" field-size="lg"/>
+                            </p:fieldset>
+                        </b:formGroup> 
+                        <b:formGroup>
+                            <p:fieldset legend="Password">
+                                <b:inputText value="#{employeeBean.entity.userPassword}" field-size="lg"/>
+                            </p:fieldset>
+                        </b:formGroup>
+                    </b:panelGrid>
+                    <p:spacer height="5px"/>
+                    <b:panelGrid colSpans="12" size="lg" style-class="ui-fluid">
+                        <p:fieldset legend="Contact Details">
+                            <b:panelGrid colSpans="6,6" size="lg" style-class="ui-fluid">
+                                <b:formGroup>
+                                    <p:fieldset legend="Landline number">
+                                        <b:inputText value="#{employeeBean.entity.contactDetail.landLineNumber}" field-size="lg" mask="9{1,999}" maxlength="10" required="true" requiredMessage="Enter landline number"/>
+                                    </p:fieldset>
+                                </b:formGroup>
+                                <b:formGroup>
+                                    <p:fieldset legend="Mobile number">
+                                        <b:inputText value="#{employeeBean.entity.contactDetail.mobileNumber}" field-size="lg" mask="9{1,999}" maxlength="10" required="true" requiredMessage="Enter mobile number"/>
+                                    </p:fieldset>
+                                </b:formGroup>
+                                <b:formGroup>
+                                    <p:fieldset legend="Email Address">
+                                        <b:inputText value="#{employeeBean.entity.contactDetail.emailAddress}" field-size="lg" required="true" requiredMessage="Enter email address"/>
+                                    </p:fieldset>
+                                </b:formGroup>
+                            </b:panelGrid>
+                            <p:spacer height="5px"/>
+                            <b:panelGrid colSpans="12" size="lg" style-class="ui-fluid">
+                                <p:fieldset legend="Addresses">
+                                    <b:formGroup>
+                                        <b:panelGrid col-spans="2,3,2,2,2,1" size="md" styleClass="ui-fluid">
+                                            <p:outputLabel value="Type"/>
+                                            <p:outputLabel value="Line 1"/>
+                                            <p:outputLabel value="Line 2"/>
+                                            <p:outputLabel value="Line 3"/>
+                                            <p:outputLabel value="Code"/>
+                                            <p:outputLabel value="Action"/>
+                                        </b:panelGrid>
+                                        <p:separator/>
+                                        <p:outputPanel id="addressTab">
+                                            <ui:repeat value="#{employeeBean.entity.addresses}" var="address" varStatus="addressVarStatus">
+                                                <b:panelGrid col-spans="2,3,2,2,2,1" size="md" styleClass="ui-fluid">
+                                                    <b:formGroup>
+                                                        <b:selectOneMenu value="#{address.addressType}" required="true" converter="entityConverter" requiredMessage="Please select address type">
+                                                            <f:selectItem itemLabel="Select One"  noSelectionOption="true"/>
+                                                            <f:selectItems value="#{employeeBean.addressTypes}" var="addressType" itemLabel="#{addressType.toString()}" itemValue="#{addressType}"/>
+                                                        </b:selectOneMenu>
+                                                    </b:formGroup>
+                                                    <b:formGroup>
+                                                        <b:inputText required="true" requiredMessage="Provide line 1" value="#{address.line1}"/> 
+                                                    </b:formGroup>
+                                                    <b:formGroup>
+                                                        <b:inputText value="#{address.line2}"/> 
+                                                    </b:formGroup>
+                                                    <b:formGroup>
+                                                        <b:inputText value="#{address.line3}"/> 
+                                                    </b:formGroup>
+                                                    <b:formGroup>
+                                                        <b:inputText value="#{address.code}"  mask="9{0,999}" maxlength="4" required="true" requiredMessage="Enter code"/>
+                                                    </b:formGroup>
+                                                    <b:formGroup>
+                                                        <b:row>
+                                                            <b:commandButton action="#{employeeBean.removeAddress(address)}" iconAwesome="fa-close" size="md" look="danger" update="@form" immediate="true"/>
+                                                        </b:row>
+                                                    </b:formGroup>
+                                                </b:panelGrid>
+                                            </ui:repeat>
+                                        </p:outputPanel>
+                                        <b:row>
+                                            <b:commandButton action="#{employeeBean.addNewAddress()}" value="Add Another Record" iconAwesome="fa-plus" large-screen="full-width" size="md" look="primary" update="addressTab"/>
+                                        </b:row>
+                                    </b:formGroup>
+                                </p:fieldset>
+                            </b:panelGrid>
+                            <p:spacer height="5px"/>
+                            <b:panelGrid colSpans="12" size="lg" style-class="ui-fluid">
+                                <p:fieldset legend="Social Media Addresses">
+                                    <b:formGroup>
+                                        <b:panelGrid col-spans="5,6,1" size="md" styleClass="ui-fluid">
+                                            <p:outputLabel value="Social Media Type"/>
+                                            <p:outputLabel value="Social Address"/>
+                                            <p:outputLabel value="Action"/>
+                                        </b:panelGrid>
+                                        <p:separator/>
+                                        <p:outputPanel id="socialAddressTab">
+                                            <ui:repeat value="#{employeeBean.entity.contactDetail.socialMediaAddresses}" var="socialAddress" varStatus="socialAddressVarStatus">
+                                                <b:panelGrid col-spans="5,6,1" size="md" styleClass="ui-fluid">
+                                                    <b:formGroup>
+                                                        <b:inputText required="true" requiredMessage="Provide social type" value="#{socialAddress.mediaType}"/> 
+                                                    </b:formGroup>
+                                                    <b:formGroup>
+                                                        <b:inputText required="true" requiredMessage="Provide social media address" value="#{socialAddress.mediaAddress}"/> 
+                                                    </b:formGroup>
+                                                    <b:formGroup>
+                                                        <b:row>
+                                                            <b:commandButton action="#{employeeBean.removeSocialMediaAddress(socialAddress)}" iconAwesome="fa-close" large-screen="full-width" size="md" look="danger" update="@form" immediate="true"/>
+                                                        </b:row>
+                                                    </b:formGroup>
+                                                </b:panelGrid>
+                                            </ui:repeat>
+                                        </p:outputPanel>
+                                        <b:row>
+                                            <b:commandButton action="#{employeeBean.addSocialAddress()}" value="Add Another Record" iconAwesome="fa-plus" large-screen="full-width" size="md" look="primary" update="socialAddressTab"/>
+                                        </b:row>
+                                    </b:formGroup>
+                                </p:fieldset>
+                            </b:panelGrid>
+                            <p:spacer height="5px"/>
+                        </p:fieldset>
+                    </b:panelGrid>
+                    <f:facet name="footer">
+                        <b:row>
+                            <b:panelGrid colSpans="6,6" size="lg" styleClass="ui-fluid">
+                                <b:commandButton large-screen="full-width" size="lg" value="Save" look="success" action="#{employeeBean.save(employeeBean.entity)}" update="@form" />
+                                <b:commandButton large-screen="full-width" size="lg" value="Cancel" look="danger" action="#{employeeBean.cancel(employeeBean.entity)}" immediate="true"  process="@this" update="@(form)"/>
+                            </b:panelGrid>
+                        </b:row>
+                    </f:facet>
+                </b:panel>
+                <b:panel rendered="#{employeeBean.view}" look="default" collapsible="false">
+                    <f:facet name="heading">
+                        <p:outputLabel value="#{employeeBean.panelTitleName}" styleClass="panel-title-css"/>
+                    </f:facet>
+                    <b:panelGrid colSpans="6,6" size="lg" style-class="ui-fluid">                        
+                        <b:formGroup>
+                            <p:fieldset legend="First Name">
+                                <b:inputText value="#{employeeBean.entity.firstName}" field-size="lg" readonly="true"/>
+                            </p:fieldset>
+                        </b:formGroup>
+                        <b:formGroup>
+                            <p:fieldset legend="Last Name">
+                                <b:inputText value="#{employeeBean.entity.lastName}" field-size="lg" readonly="true"/>
+                            </p:fieldset>
+                        </b:formGroup>
+                        <b:formGroup>
+                            <p:fieldset legend="Employee Number">
+                                <b:inputText value="#{employeeBean.entity.employeeNumber}" field-size="lg" readonly="true"/>
+                            </p:fieldset>
+                        </b:formGroup> 
+                        <b:formGroup>
+                            <p:fieldset legend="Username">
+                                <b:inputText value="#{employeeBean.entity.username}" field-size="lg" readonly="true"/>
+                            </p:fieldset>
+                        </b:formGroup> 
+                        <b:formGroup>
+                            <p:fieldset legend="Password">
+                                <b:inputText value="#{employeeBean.entity.userPassword}" field-size="lg" readonly="true"/>
+                            </p:fieldset>
+                        </b:formGroup> 
+                    </b:panelGrid>                
+                    <p:spacer height="5px"/>
+                    <b:panelGrid colSpans="12" size="lg" style-class="ui-fluid">
+                        <p:fieldset legend="Contact Details">
+                            <b:panelGrid colSpans="6,6" size="lg" style-class="ui-fluid">
+                                <b:formGroup>
+                                    <p:fieldset legend="Landline Number">
+                                        <b:inputText value="#{employeeBean.entity.contactDetail.landLineNumber}" field-size="lg" readonly="true"/>
+                                    </p:fieldset>
+                                </b:formGroup>
+                                <b:formGroup>
+                                    <p:fieldset legend="Mobile Number">
+                                        <b:inputText value="#{employeeBean.entity.contactDetail.mobileNumber}" field-size="lg" readonly="true"/>
+                                    </p:fieldset>
+                                </b:formGroup>
+                                <b:formGroup>
+                                    <p:fieldset legend="Email Address">
+                                        <b:inputText value="#{employeeBean.entity.contactDetail.emailAddress}" field-size="lg" readonly="true"/>
+                                    </p:fieldset>
+                                </b:formGroup>
+                            </b:panelGrid>
+                            <p:spacer height="5px"/>
+                            <b:panelGrid colSpans="12" size="lg" style-class="ui-fluid">
+                                <p:fieldset legend="Addresses">
+                                    <p:dataTable value="#{employeeBean.entity.addresses}" var="address" paginator="true" paginatorPosition="top" paginatorAlwaysVisible="false" reflow="true" rows="10">
+                                        <p:column headerText="Type">
+                                            <h:outputText value="#{address.addressType.toString()}"/>
+                                        </p:column>
+                                        <p:column headerText="Line 1">
+                                            <h:outputText value="#{address.line1}"/>
+                                        </p:column>
+                                        <p:column headerText="Line 2">
+                                            <h:outputText value="#{address.line2}"/>
+                                        </p:column>
+                                        <p:column headerText="Line 3">
+                                            <h:outputText value="#{address.line3}"/>
+                                        </p:column>
+                                        <p:column headerText="Code">
+                                            <h:outputText value="#{address.code}"/>
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:fieldset>
+                            </b:panelGrid>
+                            <p:spacer height="5px"/>
+                            <b:panelGrid colSpans="12" size="lg" style-class="ui-fluid">
+                                <p:fieldset legend="Social Media Addresses">
+                                    <p:dataTable value="#{employeeBean.entity.contactDetail.socialMediaAddresses}" var="socialMedia" paginator="true" paginatorPosition="top" paginatorAlwaysVisible="false" reflow="true" rows="10">
+                                        <p:column headerText="Type">
+                                            <h:outputText value="#{socialMedia.mediaType}"/>
+                                        </p:column>
+                                        <p:column headerText="Address">
+                                            <h:outputText value="#{socialMedia.mediaAddress}"/>
+                                        </p:column>   
+                                    </p:dataTable>
+                                </p:fieldset>
+                            </b:panelGrid>
+                        </p:fieldset>
+                    </b:panelGrid>
+                    <f:facet name="footer">
+                        <b:row>
+                            <b:panelGrid colSpans="12" size="lg" styleClass="ui-fluid">
+                                <b:commandButton large-screen="full-width" size="lg" value="Back" look="primary" action="#{employeeBean.back()}" update="@form" />
+                            </b:panelGrid>
+                        </b:row>
+                    </f:facet>
+                </b:panel>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
