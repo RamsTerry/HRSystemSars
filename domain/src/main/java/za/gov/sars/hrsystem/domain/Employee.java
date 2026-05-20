@@ -16,10 +16,10 @@ import org.hibernate.envers.Audited;
  * @author S2028398
  */
 @Audited
-@Getter
-@Setter
 @Entity
 @Table(name = "employee")
+@Getter
+@Setter
 public class Employee extends Person {
 
     @Column(name = "employee_number")
