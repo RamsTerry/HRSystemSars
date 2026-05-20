@@ -23,8 +23,6 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
  *
  * @author S2028398
  */
-@Getter
-@Setter
 public class BaseBean<T> extends SpringBeanAutowiringSupport implements Serializable {
     
     @ManagedProperty(value = "#{activeUser}")
@@ -180,5 +178,63 @@ public class BaseBean<T> extends SpringBeanAutowiringSupport implements Serializ
     public void remove(T entity) {
         collections.remove(entity);
     }
+
+    public boolean isList() {
+        return list;
+    }
+
+    public void setList(boolean list) {
+        this.list = list;
+    }
+
+    public boolean isAdd() {
+        return add;
+    }
+
+    public void setAdd(boolean add) {
+        this.add = add;
+    }
+
+    public boolean isUpdate() {
+        return update;
+    }
+
+    public void setUpdate(boolean update) {
+        this.update = update;
+    }
+
+    public boolean isView() {
+        return view;
+    }
+
+    public void setView(boolean view) {
+        this.view = view;
+    }
+
+    public boolean isAddressPanel() {
+        return addressPanel;
+    }
+
+    public void setAddressPanel(boolean addressPanel) {
+        this.addressPanel = addressPanel;
+    }
+
+    public boolean isSocialAddress() {
+        return socialAddress;
+    }
+
+    public void setSocialAddress(boolean socialAddress) {
+        this.socialAddress = socialAddress;
+    }
+
+    public String getPanelTitleName() {
+        return panelTitleName;
+    }
+
+    public void setPanelTitleName(String panelTitleName) {
+        this.panelTitleName = panelTitleName;
+    }
+    
+    
     
 }

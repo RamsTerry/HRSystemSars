@@ -11,8 +11,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.envers.Audited;
 
 /**
@@ -22,8 +20,6 @@ import org.hibernate.envers.Audited;
 @Audited
 @Entity
 @Table(name = "contact_detail")
-@Getter
-@Setter
 public class ContactDetail extends BaseEntity {
 
     @Column(name = "mobile_number")
@@ -45,4 +41,38 @@ public class ContactDetail extends BaseEntity {
     public void removeSocialAddress(SocialMediaAddress socialAddress) {
         socialMediaAddresses.remove(socialAddress);
     }
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
+    public String getLandLineNumber() {
+        return landLineNumber;
+    }
+
+    public void setLandLineNumber(String landLineNumber) {
+        this.landLineNumber = landLineNumber;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public List<SocialMediaAddress> getSocialMediaAddresses() {
+        return socialMediaAddresses;
+    }
+
+    public void setSocialMediaAddresses(List<SocialMediaAddress> socialMediaAddresses) {
+        this.socialMediaAddresses = socialMediaAddresses;
+    }
+    
+    
 }

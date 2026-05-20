@@ -25,7 +25,7 @@ public class DatasourceUtility {
         dataSource.setDataSourceClassName("com.microsoft.sqlserver.jdbc.SQLServerDataSource");
 
         dataSource.addDataSourceProperty("url", "jdbc:sqlserver://LPTAXN73\\SQLEXPRESS14:2010;databaseName=HR_DB");
-        dataSource.addDataSourceProperty("user", "terry");
+        dataSource.addDataSourceProperty("user", "Rams");
         dataSource.addDataSourceProperty("password", "P@sswords.");
         return dataSource;
     }

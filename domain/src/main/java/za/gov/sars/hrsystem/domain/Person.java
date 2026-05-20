@@ -15,8 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  *
@@ -25,8 +23,6 @@ import lombok.Setter;
 @DiscriminatorValue("person")
 @MappedSuperclass
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
-@Getter
-@Setter
 public class Person extends BaseEntity {
 
     @Column(name = "first_name")
@@ -49,4 +45,38 @@ public class Person extends BaseEntity {
     public void removeAddress(Address address) {
         addresses.remove(address);
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public ContactDetail getContactDetail() {
+        return contactDetail;
+    }
+
+    public void setContactDetail(ContactDetail contactDetail) {
+        this.contactDetail = contactDetail;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
+    
+    
 }

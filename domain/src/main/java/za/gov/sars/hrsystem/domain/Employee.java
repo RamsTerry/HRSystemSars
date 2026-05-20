@@ -7,8 +7,6 @@ package za.gov.sars.hrsystem.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.envers.Audited;
 
 /**
@@ -18,8 +16,6 @@ import org.hibernate.envers.Audited;
 @Audited
 @Entity
 @Table(name = "employee")
-@Getter
-@Setter
 public class Employee extends Person {
 
     @Column(name = "employee_number")
@@ -30,4 +26,30 @@ public class Employee extends Person {
 
     @Column(name = "user_password")
     private String userPassword;
+
+    public String getEmployeeNumber() {
+        return employeeNumber;
+    }
+
+    public void setEmployeeNumber(String employeeNumber) {
+        this.employeeNumber = employeeNumber;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+    
+    
 }

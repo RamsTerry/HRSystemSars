@@ -18,8 +18,6 @@ import za.gov.sars.hrsystem.domain.Employee;
  */
 @ManagedBean
 @SessionScoped
-@Getter
-@Setter
 public class ActiveUser implements Serializable {
     
     private boolean userLoginIndicator;
@@ -39,6 +37,38 @@ public class ActiveUser implements Serializable {
             setEmployeeNumber(loginEmployee.getEmployeeNumber());
             setUserLoginIndicator(true);
         }
+    }
+
+    public boolean isUserLoginIndicator() {
+        return userLoginIndicator;
+    }
+
+    public void setUserLoginIndicator(boolean userLoginIndicator) {
+        this.userLoginIndicator = userLoginIndicator;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmployeeNumber() {
+        return employeeNumber;
+    }
+
+    public void setEmployeeNumber(String employeeNumber) {
+        this.employeeNumber = employeeNumber;
     }
     
 }

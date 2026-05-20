@@ -8,8 +8,6 @@ package za.gov.sars.hrsystem.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.envers.Audited;
 
 /**
@@ -19,8 +17,6 @@ import org.hibernate.envers.Audited;
 @Audited
 @Entity
 @Table(name = "social_media_address")
-@Getter
-@Setter
 public class SocialMediaAddress extends BaseEntity {
 
     @Column(name = "social_media_type")
@@ -28,4 +24,22 @@ public class SocialMediaAddress extends BaseEntity {
 
     @Column(name = "social_media_address")
     private String mediaAddress;
+
+    public String getMediaType() {
+        return mediaType;
+    }
+
+    public void setMediaType(String mediaType) {
+        this.mediaType = mediaType;
+    }
+
+    public String getMediaAddress() {
+        return mediaAddress;
+    }
+
+    public void setMediaAddress(String mediaAddress) {
+        this.mediaAddress = mediaAddress;
+    }
+    
+    
 }

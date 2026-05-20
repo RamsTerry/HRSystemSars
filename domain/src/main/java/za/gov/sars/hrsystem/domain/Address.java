@@ -9,8 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.envers.Audited;
 import za.gov.sars.hrsystem.common.AddressType;
 
@@ -19,8 +17,6 @@ import za.gov.sars.hrsystem.common.AddressType;
  * @author S2028398
  */
 @Audited
-@Getter
-@Setter
 @Entity
 @Table(name = "address")
 public class Address extends BaseEntity {
@@ -40,4 +36,46 @@ public class Address extends BaseEntity {
     @Column(name = "add_type")
     @Enumerated(EnumType.STRING)
     private AddressType addressType;
+
+    public String getLine1() {
+        return line1;
+    }
+
+    public void setLine1(String line1) {
+        this.line1 = line1;
+    }
+
+    public String getLine2() {
+        return line2;
+    }
+
+    public void setLine2(String line2) {
+        this.line2 = line2;
+    }
+
+    public String getLine3() {
+        return line3;
+    }
+
+    public void setLine3(String line3) {
+        this.line3 = line3;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public AddressType getAddressType() {
+        return addressType;
+    }
+
+    public void setAddressType(AddressType addressType) {
+        this.addressType = addressType;
+    }
+    
+    
 }

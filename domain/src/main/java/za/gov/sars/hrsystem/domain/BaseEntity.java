@@ -17,8 +17,6 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.envers.Audited;
 
 /**
@@ -29,8 +27,6 @@ import org.hibernate.envers.Audited;
 @MappedSuperclass
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 @Audited
-@Getter
-@Setter
 public class BaseEntity implements Serializable {
 
     @Id
@@ -54,5 +50,55 @@ public class BaseEntity implements Serializable {
 
     @Transient
     private boolean render;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public boolean isRender() {
+        return render;
+    }
+
+    public void setRender(boolean render) {
+        this.render = render;
+    }
+    
+    
 
 }
